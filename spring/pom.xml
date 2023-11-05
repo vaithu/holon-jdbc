@@ -48,6 +48,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+			<version>${spring-framework}</version>
 		</dependency>
 
 		<!-- Test -->
@@ -61,6 +62,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
+			<version>${spring-framework}</version>
 		</dependency>
 
 		<!-- DataSources -->

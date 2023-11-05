@@ -29,7 +29,7 @@ public class MySQL8DriverVersionIT {
 
 		DatabasePlatform platform = DatabasePlatform.fromUrl("jdbc:mysql://localhost:3306/test");
 		assertNotNull(platform);
-		assertEquals("com.mysql.cj.jdbc.Driver", platform.getDriverClassName());
+		assertEquals("com.mysql.jdbc.Driver", platform.getDriverClassName());
 
 	}
 
