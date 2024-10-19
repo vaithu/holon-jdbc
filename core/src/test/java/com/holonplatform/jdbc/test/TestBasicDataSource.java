@@ -29,11 +29,11 @@ import org.junit.jupiter.api.Test;
 import com.holonplatform.jdbc.BasicDataSource;
 import com.holonplatform.jdbc.DatabasePlatform;
 
-public class TestBasicDataSource {
+class TestBasicDataSource {
 
 	@SuppressWarnings("resource")
 	@Test
-	public void testBuilder() throws SQLException {
+	void testBuilder() throws SQLException {
 
 		DataSource dataSource = BasicDataSource.builder().url("jdbc:h2:mem:testdb_b1").username("sa")
 				.driverClassName("org.h2.Driver").build();

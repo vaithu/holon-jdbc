@@ -1,12 +1,12 @@
 /*
  * Copyright 2016-2017 Axioma srl.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,85 +15,80 @@
  */
 package com.holonplatform.jdbc.spring.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import com.holonplatform.core.tenancy.TenantResolver;
 import com.holonplatform.jdbc.DataSourceBuilder;
 import com.holonplatform.jdbc.DataSourceConfigProperties;
 import com.holonplatform.jdbc.MultiTenantDataSource;
 import com.holonplatform.jdbc.TenantDataSourceProvider;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestEnableMultiTenantDataSourceConfigProvider.Config.class)
-public class TestEnableMultiTenantDataSourceConfigProvider {
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
 
-	@Configuration
-	// @EnableDataSource(dataContextId = "mt2") // TODO EnableMultiTenantDataSource
-	protected static class Config {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-		@Bean("test_tenant_dsprovider")
-		public TenantDataSourceProvider dsProvider() {
-			return new TenantDataSourceProvider() {
+@SpringJUnitConfig(classes = TestEnableMultiTenantDataSourceConfigProvider.Config.class)
+class TestEnableMultiTenantDataSourceConfigProvider {
 
-				@Override
-				public DataSource getDataSource(String tenantId) {
-					Properties properties = new Properties();
-					properties.put("holon.datasource.username", "sa");
-					properties.put("holon.datasource.url",
-							"jdbc:h2:mem:testdbt1;INIT=RUNSCRIPT FROM 'classpath:test-scripts/db1.sql'");
-					return DataSourceBuilder.create()
-							.build(DataSourceConfigProperties.builder().withPropertySource(properties).build());
-				}
+    @Configuration
+    // @EnableDataSource(dataContextId = "mt2") // TODO EnableMultiTenantDataSource
+    protected static class Config {
 
-			};
-		}
+        @Bean("test_tenant_dsprovider")
+        public TenantDataSourceProvider dsProvider() {
+            return new TenantDataSourceProvider() {
 
-		@Bean
-		public DataSource dataSource() {
-			return MultiTenantDataSource.builder().provider(dsProvider()).build();
-		}
+                @Override
+                public DataSource getDataSource(String tenantId) {
+                    Properties properties = new Properties();
+                    properties.put("holon.datasource.username", "sa");
+                    properties.put("holon.datasource.url",
+                            "jdbc:h2:mem:testdbt1;INIT=RUNSCRIPT FROM 'classpath:test-scripts/db1.sql'");
+                    return DataSourceBuilder.create()
+                            .build(DataSourceConfigProperties.builder().withPropertySource(properties).build());
+                }
 
-	}
+            };
+        }
 
-	@Autowired
-	private DataSource dataSource;
+        @Bean
+        public DataSource dataSource() {
+            return MultiTenantDataSource.builder().provider(dsProvider()).build();
+        }
 
-	@Test
-	public void testDataSource() {
+    }
 
-		assertNotNull(dataSource);
+    @Autowired
+    private DataSource dataSource;
 
-		TenantResolver.execute("T1", () -> {
+    @Test
+    void testDataSource() {
 
-			try (Connection c = dataSource.getConnection()) {
-				assertNotNull(c);
+        assertNotNull(dataSource);
 
-				try (ResultSet rs = c.createStatement().executeQuery("select str from test1 where key=1")) {
-					rs.next();
-					assertEquals("One", rs.getString(1));
-				}
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
+        TenantResolver.execute("T1", () -> {
 
-		});
+            try (Connection c = dataSource.getConnection()) {
+                assertNotNull(c);
 
-	}
+                try (ResultSet rs = c.createStatement().executeQuery("select str from test1 where key=1")) {
+                    rs.next();
+                    assertEquals("One", rs.getString(1));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
+    }
 
 }

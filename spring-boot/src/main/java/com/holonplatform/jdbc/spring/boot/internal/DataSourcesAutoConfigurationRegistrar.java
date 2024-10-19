@@ -103,10 +103,10 @@ public class DataSourcesAutoConfigurationRegistrar implements ImportBeanDefiniti
 
 			if (!dataContextProperties.isEmpty()) {
 
-				if (environment instanceof ConfigurableEnvironment) {
+				if (environment instanceof ConfigurableEnvironment configurableEnvironment) {
 					// adds a property source to provide spring.datasource.initialize with false value to avoid
 					// DataSource init from other auto-configuration class
-					((ConfigurableEnvironment) environment).getPropertySources()
+					configurableEnvironment.getPropertySources()
 							.addFirst(new AvoidDataSourceInitializePropertySource());
 				}
 

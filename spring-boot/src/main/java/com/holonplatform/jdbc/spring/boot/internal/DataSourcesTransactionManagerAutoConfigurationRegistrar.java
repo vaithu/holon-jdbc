@@ -59,16 +59,16 @@ public class DataSourcesTransactionManagerAutoConfigurationRegistrar
 	@Override
 	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
-		if (beanFactory instanceof ListableBeanFactory) {
+		if (beanFactory instanceof ListableBeanFactory factory) {
 
-			String[] dataSourceBeanNames = ((ListableBeanFactory) beanFactory).getBeanNamesForType(DataSource.class,
+			String[] dataSourceBeanNames = factory.getBeanNamesForType(DataSource.class,
 					false, true);
 			if (dataSourceBeanNames != null) {
 				for (String dataSourceBeanName : dataSourceBeanNames) {
 					BeanDefinition bd = registry.getBeanDefinition(dataSourceBeanName);
-					if (bd instanceof DataContextBoundBeanDefinition) {
+					if (bd instanceof DataContextBoundBeanDefinition definition) {
 						DataSourceRegistrar.registerDataSourceTransactionManager(registry, dataSourceBeanName,
-								((DataContextBoundBeanDefinition) bd).getDataContextId().orElse(null),
+								definition.getDataContextId().orElse(null),
 								PrimaryMode.AUTO);
 					}
 				}

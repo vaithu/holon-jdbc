@@ -26,20 +26,17 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.holonplatform.jdbc.spring.EnableDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestEnableDataSourceDataContext.Config.class)
-public class TestEnableDataSourceDataContext {
+@SpringJUnitConfig(classes = TestEnableDataSourceDataContext.Config.class)
+class TestEnableDataSourceDataContext {
 
 	@Configuration
 	@PropertySource("test.properties")
@@ -48,11 +45,11 @@ public class TestEnableDataSourceDataContext {
 	}
 
 	@Autowired
-	@Qualifier("test")
+			@Qualifier("test")
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 
 		assertNotNull(dataSource);
 

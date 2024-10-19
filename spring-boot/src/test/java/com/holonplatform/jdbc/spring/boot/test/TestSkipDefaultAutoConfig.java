@@ -35,7 +35,7 @@ import com.holonplatform.jdbc.internal.DefaultBasicDataSource;
 
 @SpringBootTest
 @ActiveProfiles("test3")
-public class TestSkipDefaultAutoConfig {
+class TestSkipDefaultAutoConfig {
 
 	@Configuration
 	@EnableAutoConfiguration
@@ -55,7 +55,7 @@ public class TestSkipDefaultAutoConfig {
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 		assertNotNull(dataSource);
 
 		assertTrue(dataSource instanceof DefaultBasicDataSource);

@@ -35,7 +35,7 @@ import com.holonplatform.jdbc.spring.boot.DataSourcesAutoConfiguration;
 
 @SpringBootTest
 @ActiveProfiles("test1")
-public class TestExcludeAutoConfig {
+class TestExcludeAutoConfig {
 
 	@Configuration
 	@EnableAutoConfiguration(exclude = DataSourcesAutoConfiguration.class)
@@ -47,7 +47,7 @@ public class TestExcludeAutoConfig {
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 		assertNotNull(dataSource);
 
 		// Spring boot 2 default is Hikari datasource

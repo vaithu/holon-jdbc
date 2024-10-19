@@ -22,10 +22,10 @@ import org.junit.jupiter.api.Test;
 
 import com.holonplatform.jdbc.DatabasePlatform;
 
-public class MySQL8DriverVersionIT {
+class MySQL8DriverVersionIT {
 
 	@Test
-	public void testMySQLDriver() {
+	void testMySQLDriver() {
 
 		DatabasePlatform platform = DatabasePlatform.fromUrl("jdbc:mysql://localhost:3306/test");
 		assertNotNull(platform);

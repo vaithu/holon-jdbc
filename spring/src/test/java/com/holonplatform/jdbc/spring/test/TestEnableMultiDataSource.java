@@ -25,19 +25,16 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.holonplatform.jdbc.spring.EnableDataSource;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestEnableMultiDataSource.Config.class)
-public class TestEnableMultiDataSource {
+@SpringJUnitConfig(classes = TestEnableMultiDataSource.Config.class)
+class TestEnableMultiDataSource {
 
 	@Configuration
 	@PropertySource("multi.properties")
@@ -56,15 +53,15 @@ public class TestEnableMultiDataSource {
 	}
 
 	@Autowired
-	@Qualifier("one")
+			@Qualifier("one")
 	private DataSource dataSource1;
 
 	@Autowired
-	@Qualifier("two")
+			@Qualifier("two")
 	private DataSource dataSource2;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 
 		assertNotNull(dataSource1);
 		assertNotNull(dataSource2);

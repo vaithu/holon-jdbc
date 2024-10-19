@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @ActiveProfiles("multi")
-public class TestMultiDataSourceMulti {
+class TestMultiDataSourceMulti {
 
 	@Configuration
 	@EnableAutoConfiguration
@@ -54,7 +54,7 @@ public class TestMultiDataSourceMulti {
 
 	@Transactional("one")
 	@Test
-	public void testDataSource1() throws SQLException {
+	void testDataSource1() throws SQLException {
 		assertNotNull(dataSource1);
 
 		try (Connection c = dataSource1.getConnection()) {
@@ -71,7 +71,7 @@ public class TestMultiDataSourceMulti {
 
 	@Transactional("two")
 	@Test
-	public void testDataSource2() throws SQLException {
+	void testDataSource2() throws SQLException {
 		assertNotNull(dataSource2);
 
 		try (Connection c = dataSource2.getConnection()) {

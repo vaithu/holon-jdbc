@@ -272,9 +272,9 @@ public class DefaultMultiTenantDataSource implements MultiTenantDataSource {
 			LinkedList<Throwable> exceptions = new LinkedList<>();
 
 			for (DataSource dataSource : tenantDataSources.values()) {
-				if (dataSource instanceof Closeable) {
+				if (dataSource instanceof Closeable closeable) {
 					try {
-						((Closeable) dataSource).close();
+						closeable.close();
 					} catch (Exception e) {
 						exceptions.add(e);
 					}

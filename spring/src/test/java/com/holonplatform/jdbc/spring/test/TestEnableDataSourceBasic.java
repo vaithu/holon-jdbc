@@ -21,19 +21,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.holonplatform.jdbc.internal.DefaultBasicDataSource;
 import com.holonplatform.jdbc.spring.EnableDataSource;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestEnableDataSourceBasic.Config.class)
-public class TestEnableDataSourceBasic {
+@SpringJUnitConfig(classes = TestEnableDataSourceBasic.Config.class)
+class TestEnableDataSourceBasic {
 
 	@Configuration
 	@PropertySource("test.properties")
@@ -45,7 +42,7 @@ public class TestEnableDataSourceBasic {
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() {
+	void testDataSource() {
 
 		assertNotNull(dataSource);
 

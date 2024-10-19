@@ -35,10 +35,10 @@ import com.holonplatform.jdbc.internal.DefaultBasicDataSource;
 import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class TestDataSourceBuilder {
+class TestDataSourceBuilder {
 
 	@Test
-	public void testBase() {
+	void testBase() {
 		assertNull(DatabasePlatform.fromUrl(null));
 
 		DatabasePlatform p = DatabasePlatform.fromUrl("jdbc:h2:mem:testdb");
@@ -48,7 +48,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testDefaultType() {
+	void testDefaultType() {
 		Properties props = new Properties();
 		props.put(DataSourceConfigProperties.DEFAULT_NAME + "." + DataSourceConfigProperties.URL.getKey(),
 				"jdbc:h2:mem:testdbx0");
@@ -62,7 +62,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testExplicitType() {
+	void testExplicitType() {
 		Properties props = new Properties();
 		props.put(DataSourceConfigProperties.DEFAULT_NAME + "." + DataSourceConfigProperties.URL.getKey(),
 				"jdbc:h2:mem:testdbx1");
@@ -88,14 +88,14 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testDefaultTypeNoContextId() {
+	void testDefaultTypeNoContextId() {
 		DataSource ds = DataSourceBuilder.create()
 				.build(DataSourceConfigProperties.builder().withPropertySource("test_build.properties").build());
 		assertNotNull(ds);
 	}
 
 	@Test
-	public void testBasicType() throws SQLException {
+	void testBasicType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create()
 				.build(DataSourceConfigProperties.builder("basic").withPropertySource("test_build.properties").build());
 		assertNotNull(ds);
@@ -110,7 +110,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testCL() throws SQLException {
+	void testCL() throws SQLException {
 		DataSource ds = DataSourceBuilder.create(ClassUtils.getDefaultClassLoader())
 				.build(DataSourceConfigProperties.builder("basic").withPropertySource("test_build.properties").build());
 		assertNotNull(ds);
@@ -125,7 +125,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testTomcatType() throws SQLException {
+	void testTomcatType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
 				DataSourceConfigProperties.builder("pooling1").withPropertySource("test_build.properties").build());
 		assertNotNull(ds);
@@ -151,7 +151,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testHikariType() throws SQLException {
+	void testHikariType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
 				DataSourceConfigProperties.builder("pooling2").withPropertySource("test_build.properties").build());
 		assertNotNull(ds);
@@ -177,7 +177,7 @@ public class TestDataSourceBuilder {
 	}
 
 	@Test
-	public void testDBCPType() throws SQLException {
+	void testDBCPType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
 				DataSourceConfigProperties.builder("pooling3").withPropertySource("test_build.properties").build());
 		assertNotNull(ds);

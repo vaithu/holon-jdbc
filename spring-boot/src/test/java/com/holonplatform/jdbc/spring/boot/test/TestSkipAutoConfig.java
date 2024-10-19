@@ -37,7 +37,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @SpringBootTest
 @ActiveProfiles("test4")
-public class TestSkipAutoConfig {
+class TestSkipAutoConfig {
 
 	@Configuration
 	@EnableAutoConfiguration
@@ -63,7 +63,7 @@ public class TestSkipAutoConfig {
 	private DataSource dataSource2;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 		assertNotNull(dataSource1);
 		assertNotNull(dataSource2);
 

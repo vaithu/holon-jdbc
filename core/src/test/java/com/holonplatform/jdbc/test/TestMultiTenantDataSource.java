@@ -35,7 +35,7 @@ import com.holonplatform.jdbc.MultiTenantDataSource;
 import com.holonplatform.jdbc.TenantDataSourceProvider;
 import com.holonplatform.jdbc.internal.DefaultBasicDataSource;
 
-public class TestMultiTenantDataSource {
+class TestMultiTenantDataSource {
 
 	class TenantTestDataSourceProvider implements TenantDataSourceProvider {
 
@@ -63,7 +63,7 @@ public class TestMultiTenantDataSource {
 
 	@SuppressWarnings("resource")
 	@Test
-	public void testMultiTenantDataSource() throws SQLException {
+	void testMultiTenantDataSource() throws SQLException {
 
 		MultiTenantDataSource ds = MultiTenantDataSource.builder().provider(new TenantTestDataSourceProvider()).build();
 
@@ -135,7 +135,7 @@ public class TestMultiTenantDataSource {
 	}
 
 	@Test
-	public void testContext() {
+	void testContext() {
 
 		final TenantDataSourceProvider tdsp = tenantId -> {
 			if ("test".equals(tenantId)) {

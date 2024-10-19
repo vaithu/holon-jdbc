@@ -32,7 +32,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test2")
-public class TestNoPropertiesConfig {
+class TestNoPropertiesConfig {
 
 	@Configuration
 	@EnableAutoConfiguration
@@ -44,7 +44,7 @@ public class TestNoPropertiesConfig {
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 		assertNotNull(dataSource);
 
 		// Spring boot 2 default is Hikari datasource

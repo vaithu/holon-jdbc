@@ -26,19 +26,16 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.holonplatform.jdbc.spring.EnableDataSource;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestEnableDataSourceTomcat.Config.class)
-public class TestEnableDataSourceTomcat {
+@SpringJUnitConfig(classes = TestEnableDataSourceTomcat.Config.class)
+class TestEnableDataSourceTomcat {
 
 	@Configuration
 	@PropertySource("test.properties")
@@ -47,11 +44,11 @@ public class TestEnableDataSourceTomcat {
 	}
 
 	@Autowired
-	@Qualifier("test2")
+			@Qualifier("test2")
 	private DataSource dataSource;
 
 	@Test
-	public void testDataSource() throws SQLException {
+	void testDataSource() throws SQLException {
 
 		assertNotNull(dataSource);
 

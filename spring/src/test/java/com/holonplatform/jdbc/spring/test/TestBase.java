@@ -30,10 +30,10 @@ import com.holonplatform.jdbc.DataSourceConfigProperties;
 import com.holonplatform.jdbc.spring.SpringDataSourceConfigProperties;
 import com.holonplatform.jdbc.spring.internal.DataSourceFactoryBean;
 
-public class TestBase {
+class TestBase {
 
 	@Test
-	public void testProperties() {
+	void testProperties() {
 
 		final Properties props = new Properties();
 		props.put(DataSourceConfigProperties.DEFAULT_NAME + "." + SpringDataSourceConfigProperties.INITIALIZE.getKey(),
@@ -47,7 +47,7 @@ public class TestBase {
 	}
 
 	@Test
-	public void testFactoryBean() {
+	void testFactoryBean() {
 		assertThrows(BeanInitializationException.class, () -> {
 			FactoryBean<DataSource> fb = new DataSourceFactoryBean(
 					SpringDataSourceConfigProperties.builder().withPropertySource(new Properties()).build());
