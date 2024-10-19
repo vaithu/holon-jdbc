@@ -18,7 +18,7 @@ package com.holonplatform.jdbc;
 import java.io.Serializable;
 import java.util.ServiceLoader;
 
-import jakarta.annotation.Priority;
+import javax.annotation.Priority;
 import javax.sql.DataSource;
 
 import com.holonplatform.core.config.ConfigPropertySet.ConfigurationException;

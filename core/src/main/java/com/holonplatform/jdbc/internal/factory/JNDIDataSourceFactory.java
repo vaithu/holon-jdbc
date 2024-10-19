@@ -15,7 +15,7 @@
  */
 package com.holonplatform.jdbc.internal.factory;
 
-import jakarta.annotation.Priority;
+import javax.annotation.Priority;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
