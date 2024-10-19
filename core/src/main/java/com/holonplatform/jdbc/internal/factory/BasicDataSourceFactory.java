@@ -17,7 +17,7 @@ package com.holonplatform.jdbc.internal.factory;
 
 import java.util.Optional;
 
-import jakarta.annotation.Priority;
+import javax.annotation.Priority;
 import javax.sql.DataSource;
 
 import com.holonplatform.core.config.ConfigPropertySet.ConfigurationException;
