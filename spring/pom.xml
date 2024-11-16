@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.holon-platform.jdbc</groupId>
 		<artifactId>holon-jdbc-root</artifactId>
-		<version>5.5.1-SNAPSHOT</version>
+		<version>5.5.3-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>holon-jdbc-spring</artifactId>
@@ -83,6 +83,13 @@
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-properties-migrator</artifactId>
+			<version>3.3.5</version>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>

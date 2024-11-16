@@ -9,7 +9,7 @@
 
 	<groupId>com.holon-platform.jdbc</groupId>
 	<artifactId>holon-jdbc-root</artifactId>
-	<version>5.5.1-SNAPSHOT</version>
+	<version>5.5.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -55,14 +55,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Holon core -->
-		<holon.core.version>5.5.0</holon.core.version>
+		<holon.core.version>5.5.1-SNAPSHOT</holon.core.version>
 
 		<!-- HikariCP -->
 		<hikaricp.version>3.4.5</hikaricp.version>
 		<!-- Commons DBCP -->
 		<commons-dbcp.version>2.7.0</commons-dbcp.version>
 		<!-- Tomcat pool -->
-		<tomcat-jdbc.version>9.0.37</tomcat-jdbc.version>
+		<tomcat-jdbc.version>11.0.0</tomcat-jdbc.version>
 
 		<!-- ByteBuddy -->
 		<bytebuddy.version>1.10.6</bytebuddy.version>
@@ -72,6 +72,8 @@
 		<!-- MySQL (test) -->
 		<mysql-driver.version>5.1.49</mysql-driver.version>
 		<mysql-driver8.version>8.0.20</mysql-driver8.version>
+
+		<slf4j.version>2.0.16</slf4j.version>
 
 	</properties>
 

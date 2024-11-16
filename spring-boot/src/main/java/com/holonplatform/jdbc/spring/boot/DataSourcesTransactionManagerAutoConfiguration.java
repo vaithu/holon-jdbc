@@ -17,6 +17,7 @@ package com.holonplatform.jdbc.spring.boot;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -36,6 +37,7 @@ import com.holonplatform.jdbc.spring.boot.internal.DataSourcesTransactionManager
  * 
  * @since 5.0.0
  */
+@AutoConfiguration
 @Configuration
 @ConditionalOnClass(PlatformTransactionManager.class)
 @AutoConfigureBefore(DataSourceTransactionManagerAutoConfiguration.class)
