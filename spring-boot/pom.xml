@@ -48,6 +48,13 @@
 			<version>${holon.core.version}</version>
 		</dependency>
 
+		<!-- Spring Boot JDBC (auto-configuration classes relocated here in SB4) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-jdbc</artifactId>
+			<version>4.0.4</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
