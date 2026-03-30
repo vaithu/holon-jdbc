@@ -20,9 +20,8 @@ import javax.sql.DataSource;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import com.holonplatform.jdbc.DataSourceConfigProperties;
@@ -85,7 +84,6 @@ import com.holonplatform.jdbc.spring.boot.internal.DataSourcesAutoConfigurationR
  * @since 5.0.0
  */
 @AutoConfiguration
-@Configuration
 @ConditionalOnClass(DataSource.class)
 @AutoConfigureBefore({ DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class })
 @Import(DataSourcesAutoConfigurationRegistrar.class)
