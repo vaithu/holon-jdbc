@@ -102,8 +102,15 @@ class DataContextDataSourceInitializer implements ApplicationListener<DataContex
 					runDataScripts(dataSource);
 					this.initialized = true;
 				}
-			} catch (IllegalStateException ex) {
+			} catch (Exception ex) {
+				// Handles IllegalStateException as before, plus BeanCurrentlyInCreationException from
+				// Spring Framework 7.0's stricter circular reference detection when publishEvent is
+				// called during @PostConstruct while the bean itself is still being created.
 				LOGGER.warn("Could not send event to complete DataSource initialization (" + ex.getMessage() + ")");
+				if (!this.initialized) {
+					runDataScripts(dataSource);
+					this.initialized = true;
+				}
 			}
 		}
 	}

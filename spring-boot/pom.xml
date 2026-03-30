@@ -39,6 +39,16 @@
 			<groupId>com.holon-platform.jdbc</groupId>
 			<artifactId>holon-jdbc-spring</artifactId>
 			<version>${project.version}</version>
+			<exclusions>
+				<!-- datasource-decorator-spring-boot-autoconfigure 1.9.x references the old
+				     org.springframework.boot.autoconfigure.jdbc package that was moved to
+				     org.springframework.boot.jdbc.autoconfigure in Spring Boot 4.0, causing
+				     Spring Boot 4.0's AutoConfigurationSorter to fail with ClassNotFoundException -->
+				<exclusion>
+					<groupId>com.github.gavlyukovskiy</groupId>
+					<artifactId>datasource-decorator-spring-boot-autoconfigure</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Holon Spring boot -->
