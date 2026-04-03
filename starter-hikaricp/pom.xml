@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.holon-platform.jdbc</groupId>
 		<artifactId>holon-jdbc-root</artifactId>
-		<version>5.5.3-SNAPSHOT</version>
+		<version>10.0.0</version>
 	</parent>
 
 	<artifactId>holon-starter-jdbc-hikaricp</artifactId>
@@ -17,25 +17,42 @@
 
 	<dependencies>
 
-		<!-- Holon base Spring boot stater -->
+		<!-- Holon base Spring Boot starter -->
 		<dependency>
 			<groupId>com.holon-platform.core</groupId>
 			<artifactId>holon-starter</artifactId>
-			<version>${holon.core.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
-		<!-- Holon JDBC Spring boot -->
+		<!-- Holon JDBC Spring Boot -->
 		<dependency>
 			<groupId>com.holon-platform.jdbc</groupId>
 			<artifactId>holon-jdbc-spring-boot</artifactId>
-			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Logback aligned through parent dependencyManagement -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
 		</dependency>
 
 		<!-- HikariCP Datasource -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			<version>${hikaricp.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
