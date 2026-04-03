@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.holon-platform.jdbc</groupId>
 		<artifactId>holon-jdbc-root</artifactId>
-		<version>5.5.3-SNAPSHOT</version>
+		<version>10.0.0</version>
 	</parent>
 
 	<artifactId>holon-jdbc-bom</artifactId>
@@ -21,31 +21,26 @@
 			<dependency>
 				<groupId>com.holon-platform.jdbc</groupId>
 				<artifactId>holon-jdbc</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 
 			<!-- Spring -->
 			<dependency>
 				<groupId>com.holon-platform.jdbc</groupId>
 				<artifactId>holon-jdbc-spring</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.holon-platform.jdbc</groupId>
 				<artifactId>holon-jdbc-spring-boot</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 
 			<!-- Spring Boot starters -->
 			<dependency>
 				<groupId>com.holon-platform.jdbc</groupId>
 				<artifactId>holon-starter-jdbc</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.holon-platform.jdbc</groupId>
 				<artifactId>holon-starter-jdbc-hikaricp</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 
 		</dependencies>
