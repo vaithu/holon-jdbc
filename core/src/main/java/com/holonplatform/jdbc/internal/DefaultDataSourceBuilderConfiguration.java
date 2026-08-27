@@ -15,21 +15,6 @@
  */
 package com.holonplatform.jdbc.internal;
 
-import java.io.Serializable;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ServiceLoader;
-import java.util.WeakHashMap;
-
-import jakarta.annotation.Priority;
-
 import com.holonplatform.core.internal.Logger;
 import com.holonplatform.core.internal.utils.ClassUtils;
 import com.holonplatform.core.internal.utils.ObjectUtils;
@@ -37,6 +22,10 @@ import com.holonplatform.jdbc.DataSourceBuilder;
 import com.holonplatform.jdbc.DataSourceConfigProperties;
 import com.holonplatform.jdbc.DataSourceFactory;
 import com.holonplatform.jdbc.DataSourcePostProcessor;
+import jakarta.annotation.Priority;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * Class to load and provide default {@link DataSourceFactory}s and {@link DataSourcePostProcessor}s obtained using
@@ -165,13 +154,7 @@ public final class DefaultDataSourceBuilderConfiguration implements Serializable
 
 			final List<DataSourceFactory> results = new LinkedList<>();
 			// load from META-INF/services
-			Iterable<DataSourceFactory> loaded = AccessController
-					.doPrivileged(new PrivilegedAction<Iterable<DataSourceFactory>>() {
-						@Override
-						public Iterable<DataSourceFactory> run() {
-							return ServiceLoader.load(DataSourceFactory.class, classLoader);
-						}
-					});
+			Iterable<DataSourceFactory> loaded = ServiceLoader.load(DataSourceFactory.class, classLoader);
 			loaded.forEach(l -> results.add(l));
 			Collections.sort(results, PRIORITY_COMPARATOR);
 
@@ -207,13 +190,7 @@ public final class DefaultDataSourceBuilderConfiguration implements Serializable
 
 			final List<DataSourcePostProcessor> results = new LinkedList<>();
 			// load from META-INF/services
-			Iterable<DataSourcePostProcessor> loaded = AccessController
-					.doPrivileged(new PrivilegedAction<Iterable<DataSourcePostProcessor>>() {
-						@Override
-						public Iterable<DataSourcePostProcessor> run() {
-							return ServiceLoader.load(DataSourcePostProcessor.class, classLoader);
-						}
-					});
+			Iterable<DataSourcePostProcessor> loaded = ServiceLoader.load(DataSourcePostProcessor.class, classLoader);
 			loaded.forEach(l -> {
 				results.add(l);
 				LOGGER.debug(

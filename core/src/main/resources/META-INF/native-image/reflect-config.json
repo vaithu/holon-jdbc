@@ -1,0 +1,90 @@
+{
+  "classes": [
+    {
+      "name": "com.holonplatform.jdbc.internal.factory.HikariCPDataSourceFactory",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.internal.factory.BasicDataSourceFactory",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.internal.factory.DBCP2DataSourceFactory",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.internal.factory.TomcatJdbcDataSourceFactory",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.internal.factory.JNDIDataSourceFactory",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.DataSourceType",
+      "queryAllPublicMethods": true,
+      "queryAllPublicFields": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.BasicDataSource",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []},
+        {"name": "getConnection", "parameterTypes": []},
+        {"name": "close", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "com.zaxxer.hikari.HikariConfig",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true,
+      "queryAllPublicFields": true
+    },
+    {
+      "name": "com.zaxxer.hikari.HikariDataSource",
+      "methods": [
+        {"name": "<init>", "parameterTypes": ["com.zaxxer.hikari.HikariConfig"]}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "org.apache.commons.dbcp2.BasicDataSource",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    },
+    {
+      "name": "org.apache.tomcat.jdbc.pool.DataSource",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ],
+      "queryAllPublicMethods": true
+    }
+  ],
+  "methods": [
+    {
+      "name": "java.lang.Throwable",
+      "methods": [
+        {"name": "<init>", "parameterTypes": []}
+      ]
+    }
+  ]
+}
