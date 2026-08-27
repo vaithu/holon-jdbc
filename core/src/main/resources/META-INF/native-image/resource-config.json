@@ -1,0 +1,22 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": ".*\\.properties$"
+      },
+      {
+        "pattern": ".*\\.xml$"
+      },
+      {
+        "pattern": ".*spring/factories$"
+      },
+      {
+        "pattern": ".*spring.factories$"
+      },
+      {
+        "pattern": ".*spring/boot/autoconfigure.factories$"
+      }
+    ]
+  },
+  "bundles": []
+}

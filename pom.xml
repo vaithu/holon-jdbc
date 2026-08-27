@@ -52,10 +52,15 @@
 	</scm>
 
 	<properties>
+		<!-- Java 25 target -->
+		<maven.compiler.source>25</maven.compiler.source>
+		<maven.compiler.target>25</maven.compiler.target>
+		<java.version>25</java.version>
+		
 		<!-- Holon core -->
-		<holon.core.version>5.5.1</holon.core.version>
+		<holon.core.version>10.0.0</holon.core.version>
 		<!-- Spring Boot -->
-		<spring.boot.version>4.0.4</spring.boot.version>
+		<spring.boot.version>4.1.0</spring.boot.version>
 
 		<!-- HikariCP -->
 		<hikaricp.version>7.0.2</hikaricp.version>
@@ -70,6 +75,9 @@
 		<mysql-driver.version>8.0.33</mysql-driver.version>
 
 		<slf4j.version>2.0.17</slf4j.version>
+		
+		<!-- Micrometer for SaaS metrics -->
+		<micrometer.version>1.12.0</micrometer.version>
 
 	</properties>
 
@@ -191,7 +199,19 @@
 				<artifactId>spring-boot-jdbc</artifactId>
 				<version>${spring.boot.version}</version>
 			</dependency>
-		</dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-actuator</artifactId>
+					<version>${spring.boot.version}</version>
+				</dependency>
+
+				<!-- Micrometer for SaaS metrics and observability -->
+				<dependency>
+					<groupId>io.micrometer</groupId>
+					<artifactId>micrometer-core</artifactId>
+					<version>${micrometer.version}</version>
+				</dependency>
+			</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
@@ -229,47 +249,7 @@
 		</pluginManagement>
 
 		<plugins>
-			<!-- Aggregate javadocs -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>aggregate-javadocs</id>
-						<phase>package</phase>
-						<inherited>false</inherited>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-						<configuration>
-							<show>public</show>
-							<excludePackageNames>*.internal.*;*.examples.*</excludePackageNames>
-							<quiet>true</quiet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Assembly apidocs -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>apidocs-assembly</id>
-						<phase>package</phase>
-						<inherited>false</inherited>
-						<configuration>
-							<appendAssemblyId>true</appendAssemblyId>
-							<descriptors>
-								<descriptor>${project.basedir}/src/assembly/apidocs.xml</descriptor>
-							</descriptors>
-						</configuration>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- Javadocs and apidocs assembly removed: not required for regular builds -->
 		</plugins>
 	</build>
 

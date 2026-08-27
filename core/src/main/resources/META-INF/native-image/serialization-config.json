@@ -1,0 +1,22 @@
+{
+  "types": [
+    {
+      "name": "com.holonplatform.jdbc.DataSourceConfigProperties",
+      "allDeclaredFields": true,
+      "allDeclaredMethods": true,
+      "allDeclaredConstructors": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.transaction.JdbcTransactionOptions",
+      "allDeclaredFields": true,
+      "allDeclaredMethods": true,
+      "allDeclaredConstructors": true
+    },
+    {
+      "name": "com.holonplatform.jdbc.DatabasePlatform",
+      "allDeclaredFields": true,
+      "allDeclaredMethods": true,
+      "allDeclaredConstructors": true
+    }
+  ]
+}
