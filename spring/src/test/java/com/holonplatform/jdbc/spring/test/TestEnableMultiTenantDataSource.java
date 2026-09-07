@@ -46,7 +46,6 @@ public class TestEnableMultiTenantDataSource {
 
 	@Configuration
 	@EnableBeanContext
-	// @EnableDataSource(dataContextId = "mt1") // TODO EnableMultiTenantDataSource
 	protected static class Config {
 
 		@Bean
@@ -59,8 +58,8 @@ public class TestEnableMultiTenantDataSource {
 			Properties properties = new Properties();
 			properties.put("holon.datasource.username", "sa");
 			properties.put("holon.datasource.url",
-					"jdbc:h2:mem:testdbt1;INIT=RUNSCRIPT FROM 'classpath:test-scripts/db1.sql'");
-			return (tenantId) -> DataSourceBuilder.create()
+					"jdbc:h2:mem:multiTenantDataSource;INIT=RUNSCRIPT FROM 'classpath:test-scripts/db1.sql'");
+			return tenantId -> DataSourceBuilder.create()
 					.build(DataSourceConfigProperties.builder().withPropertySource(properties).build());
 		}
 

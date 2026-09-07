@@ -76,13 +76,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- HikariCP for metrics in MultiTenantDataSourceMetrics -->
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
