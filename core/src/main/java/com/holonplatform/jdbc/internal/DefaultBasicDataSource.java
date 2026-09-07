@@ -148,10 +148,8 @@ public class DefaultBasicDataSource implements BasicDataSource {
 	public void setDriverClass(Class<? extends Driver> driverClass) {
 		ObjectUtils.argumentNotNull(driverClass, "Driver class must be not null");
 		try {
-			this.driver = driverClass.newInstance();
-		} catch (InstantiationException e) {
-			throw new IllegalStateException("Failed to load JDBC driver class: " + driverClass.getName(), e);
-		} catch (IllegalAccessException e) {
+			this.driver = driverClass.getDeclaredConstructor().newInstance();
+		} catch (ReflectiveOperationException e) {
 			throw new IllegalStateException("Failed to load JDBC driver class: " + driverClass.getName(), e);
 		}
 		LOGGER.debug(() -> "Loaded JDBC driver: " + driverClass.getName());
@@ -271,6 +269,7 @@ public class DefaultBasicDataSource implements BasicDataSource {
 	 */
 	@Override
 	public void close() throws IOException {
+		// Connections are created on demand and no resources are retained by this data source.
 	}
 
 	/**
@@ -283,9 +282,9 @@ public class DefaultBasicDataSource implements BasicDataSource {
 	 */
 	protected Connection obtainConnection(String username, String password) throws SQLException {
 		Properties properties = new Properties();
-		Properties connectionProperties = getConnectionProperties();
-		if (connectionProperties != null) {
-			properties.putAll(connectionProperties);
+		Properties configuredConnectionProperties = getConnectionProperties();
+		if (configuredConnectionProperties != null) {
+			properties.putAll(configuredConnectionProperties);
 		}
 		if (username != null) {
 			properties.setProperty("user", username);
@@ -303,12 +302,12 @@ public class DefaultBasicDataSource implements BasicDataSource {
 	 * @throws SQLException Failed to obtain a connection
 	 */
 	protected Connection obtainConnection(Properties properties) throws SQLException {
-		String url = getUrl();
-		LOGGER.debug(() -> "Creating new DriverManager connection to [" + url + "]");
+		String connectionUrl = getUrl();
+		LOGGER.debug(() -> "Creating new DriverManager connection to [" + connectionUrl + "]");
 		if (getDriver() != null) {
-			return getConnectionFromDriver(url, getDriver(), properties);
+			return getConnectionFromDriver(connectionUrl, getDriver(), properties);
 		}
-		return getConnectionFromDriverManager(url, properties);
+		return getConnectionFromDriverManager(connectionUrl, properties);
 	}
 
 	/**

@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -36,6 +37,8 @@ import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class TestDataSourceBuilder {
+
+	private static final String TEST_BUILD_PROPERTIES = "test_build.properties";
 
 	@Test
 	public void testBase() {
@@ -90,14 +93,14 @@ public class TestDataSourceBuilder {
 	@Test
 	public void testDefaultTypeNoContextId() {
 		DataSource ds = DataSourceBuilder.create()
-				.build(DataSourceConfigProperties.builder().withPropertySource("test_build.properties").build());
+				.build(DataSourceConfigProperties.builder().withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 	}
 
 	@Test
 	public void testBasicType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create()
-				.build(DataSourceConfigProperties.builder("basic").withPropertySource("test_build.properties").build());
+				.build(DataSourceConfigProperties.builder("basic").withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 
 		assertEquals(DefaultBasicDataSource.class, ds.getClass());
@@ -112,7 +115,7 @@ public class TestDataSourceBuilder {
 	@Test
 	public void testCL() throws SQLException {
 		DataSource ds = DataSourceBuilder.create(ClassUtils.getDefaultClassLoader())
-				.build(DataSourceConfigProperties.builder("basic").withPropertySource("test_build.properties").build());
+				.build(DataSourceConfigProperties.builder("basic").withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 
 		assertEquals(DefaultBasicDataSource.class, ds.getClass());
@@ -127,7 +130,7 @@ public class TestDataSourceBuilder {
 	@Test
 	public void testTomcatType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
-				DataSourceConfigProperties.builder("pooling1").withPropertySource("test_build.properties").build());
+				DataSourceConfigProperties.builder("pooling1").withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 
 		assertEquals(org.apache.tomcat.jdbc.pool.DataSource.class, ds.getClass());
@@ -153,23 +156,16 @@ public class TestDataSourceBuilder {
 	@Test
 	public void testHikariType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
-				DataSourceConfigProperties.builder("pooling2").withPropertySource("test_build.properties").build());
+				DataSourceConfigProperties.builder("pooling2").withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 
 		assertEquals(HikariDataSource.class, ds.getClass());
 		HikariConfigMXBean cfg = ((HikariDataSource) ds).getHikariConfigMXBean();
 
-		// assertEquals("jdbc:h2:mem:testdb2", ((HikariDataSource) ds).getJdbcUrl());
-		// assertEquals("sa", ((HikariDataSource) ds).getUsername());
-
 		assertEquals(2, cfg.getMinimumIdle());
 		assertEquals(7, cfg.getMaximumPoolSize());
 
 		assertEquals(1234L, cfg.getConnectionTimeout());
-
-		// assertEquals(DatabasePlatform.H2.getDriverClassName(), ((HikariDataSource) ds).getDriverClassName());
-
-		// assertEquals(DatabasePlatform.H2.getValidationQuery(), ((HikariDataSource) ds).getConnectionTestQuery());
 
 		try (Connection c = ds.getConnection()) {
 			assertNotNull(c);
@@ -179,17 +175,17 @@ public class TestDataSourceBuilder {
 	@Test
 	public void testDBCPType() throws SQLException {
 		DataSource ds = DataSourceBuilder.create().build(
-				DataSourceConfigProperties.builder("pooling3").withPropertySource("test_build.properties").build());
+				DataSourceConfigProperties.builder("pooling3").withPropertySource(TEST_BUILD_PROPERTIES).build());
 		assertNotNull(ds);
 
 		assertEquals(org.apache.commons.dbcp2.BasicDataSource.class, ds.getClass());
 		assertEquals("jdbc:h2:mem:testdb3", ((org.apache.commons.dbcp2.BasicDataSource) ds).getUrl());
-		assertEquals("sa", ((org.apache.commons.dbcp2.BasicDataSource) ds).getUsername());
+		assertEquals("sa", ((org.apache.commons.dbcp2.BasicDataSource) ds).getUserName());
 
 		assertEquals(8, ((org.apache.commons.dbcp2.BasicDataSource) ds).getInitialSize());
 		assertEquals(12, ((org.apache.commons.dbcp2.BasicDataSource) ds).getMaxTotal());
 
-		assertEquals(1000L, ((org.apache.commons.dbcp2.BasicDataSource) ds).getMaxWaitMillis());
+		assertEquals(Duration.ofMillis(1000L), ((org.apache.commons.dbcp2.BasicDataSource) ds).getMaxWaitDuration());
 
 		assertEquals(DatabasePlatform.H2.getDriverClassName(),
 				((org.apache.commons.dbcp2.BasicDataSource) ds).getDriverClassName());
