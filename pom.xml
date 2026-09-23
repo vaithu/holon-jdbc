@@ -75,6 +75,9 @@
 		<mysql-driver.version>8.0.33</mysql-driver.version>
 
 		<slf4j.version>2.0.19</slf4j.version>
+		<!-- logback: realigns the stale pin inherited from com.holon-platform:parent (1.5.18) with
+		     the version Spring Boot 4.1.1 manages -->
+		<logback.version>1.5.38</logback.version>
 		
 		<!-- Micrometer for SaaS metrics -->
 		<micrometer.version>1.17.1</micrometer.version>
